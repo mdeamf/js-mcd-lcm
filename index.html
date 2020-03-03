@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCD and LCM</title>
+
+  <script>
+    function maximumCommonDivisor(num1, num2) {
+      // Initializing our remainder as 1.
+      let remainder = 1;
+
+      // If it reaches 0, we found our MDC.
+      while (remainder != 0) {
+        // The remainder has to be obtained between a and b.
+        remainder = num1 % num2;
+
+        // We save num2 in num1 for the next comparison.
+        num1 = num2;
+
+        // We save the remainder in num2 for the next comparison.
+        num2 = remainder;
+
+        // We do this because we're following the Euclidean algorithm.
+      }
+
+      // Return the MCD here.
+      return num1;
+    }
+
+    function leastCommonMultiple(num1, num2) {
+      // Simple logic: num1 times num2, divided by their MCD, is the LCM.
+      return (num1 * num2) / maximumCommonDivisor(num1, num2);
+    }
+
+    function calculate() {
+      let num1 = document.getElementById('num1').value;
+      let num2 = document.getElementById('num2').value;
+
+      if (num1 && num2) {
+        document.getElementById('mcd').innerHTML = maximumCommonDivisor(num1, num2);
+        document.getElementById('lcm').innerHTML = leastCommonMultiple(num1, num2);
+      }
+    }
+  </script>
+</head>
+
+<body>
+
+  <p>Number 1:</p>
+  <input type="number" name="num1" id="num1">
+
+  <p>Number 2:</p>
+  <input type="number" name="num2" id="num2">
+
+  <p>Maximum Common Divisor: <span id="mcd">0</span></p>
+  <p>Least Common Multiple: <span id="lcm">0</span></p>
+
+  <button onclick="calculate()">Calculate!</button>
+</body>
+
+</html>
